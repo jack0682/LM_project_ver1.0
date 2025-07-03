@@ -65,10 +65,10 @@ graph LR
     H --> F
 ```
 
-## 🗂️ 프로젝트 마일스톤 진행 현황
+##  프로젝트 마일스톤 진행 현황
 
 GitHub Issues 기반 마일스톤 트래킹은 아래 링크에서 확인하실 수 있습니다:
 
-👉 [🔗 LM_project.ver1.0 마일스톤 목록 보기](https://github.com/jack0682/lm_project_ver1.0/milestones)
+ [🔗 LM_project.ver1.0 마일스톤 목록 보기](https://github.com/jack0682/lm_project_ver1.0/milestones)
 
 각 마일스톤에는 해당 기간의 목표, 완료된 이슈, 진행 중인 작업이 포함되어 있습니다.
