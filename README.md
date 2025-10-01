@@ -280,3 +280,6 @@ git push origin feature/홍길동-작업명
 
 
 # Test Status Checks
+
+## CI/CD 테스트
+- GitHub Actions 활성화 완료
