@@ -1,0 +1,65 @@
+name: CI Basic
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  basic-check:
+    name: Basic Check
+    runs-on: ubuntu-22.04
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Verify repository structure
+        run: |
+          echo "✅ Repository checked out successfully"
+          echo "📁 Repository structure:"
+          ls -la
+          echo ""
+          echo "📦 ROS 2 package structure:"
+          ls -la lm_temp_package/
+          echo ""
+          echo "✅ Basic validation passed"
+      
+      - name: Check Python files
+        run: |
+          echo "🐍 Python files found:"
+          find . -name "*.py" -type f | head -20
+          echo "✅ Python files detected"
+
+  lint:
+    name: Python Lint
+    runs-on: ubuntu-22.04
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install flake8
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8
+      
+      - name: Run flake8 (critical errors only)
+        run: |
+          # E9: 런타임 에러 (문법 오류 등)
+          # F63: 비교 연산 오류
+          # F7: 문법 오류
+          # F82: undefined name
+          flake8 lm_temp_package --count --select=E9,F63,F7,F82 --show-source --statistics
+      
+      - name: Run flake8 (style warnings)
+        run: |
+          # 스타일 경고 (실패하지 않음)
+          flake8 lm_temp_package --count --exit-zero --max-line-length=127 --statistics
+        continue-on-error: true
